@@ -82,8 +82,9 @@ config.read(configFile)
 toolDir = installDir + config.get('fsociety', 'toolDir')
 logDir = installDir + config.get('fsociety', 'logDir')
 yes = config.get('fsociety', 'yes').split()
-
-fsocietylogo = color.END + '''
+color_random=[color.HEADER,color.IMPORTANT,color.NOTICE,color.OKBLUE,color.OKGREEN,color.WARNING,color.RED,color.END,color.UNDERLINE,color.LOGGING]
+random.shuffle(color_random)
+fsocietylogo = color_random[0] + '''
         d88888b .d8888.  .d88b.   .o88b. d888888b d88888b d888888b db    db
         88'     88'  YP .8P  Y8. d8P  Y8   `88'   88         88    `8b  d8'
         88ooo   `8bo.   88    88 8P         88    88ooooo    88     `8bd8'
@@ -498,7 +499,7 @@ class setoolkit:
             python-pymssql build-essential python-pexpect python-pefile python-crypto python-openssl")
         os.system("git clone --depth=1 %s %s" %
                   (self.gitRepo, self.installDir))
-        os.system("python %s/setup.py install" % self.installDir)
+        os.system("cd %s && python setup.py install" % self.installDir)
 
     def run(self):
         os.system("setoolkit")
